@@ -1,0 +1,118 @@
+(* CSE 130: Programming Assignment 1
+ * misc.ml
+ *)
+
+
+(* sumList : int list -> int 
+   * implementation:  Recursively grab head element, shrink list on each call, 
+   * and add to list
+*) 
+let rec sumList l = 
+	match l with 
+	|[] -> 0
+	| x::xs -> x + sumList xs
+
+
+(* digitsOfInt : int -> int list 
+   ***** PUT DOCUMENTATION COMMENTS HERE *****
+   (see the digits function below for an example of what is expected)
+ *)
+
+(* digitsOfInt : int -> int list 
+   * function: 
+   * implementation
+ *)
+
+let rec digitsOfInt n = match n with 
+| 0 -> []
+| x -> 
+digitsOfInt (n / 10)@[(n mod 10)]
+
+
+ 
+let digits n = digitsOfInt (abs n)
+
+
+(* From http://mathworld.wolfram.com/AdditivePersistence.html
+ * Consider the process of taking a number, adding its digits, 
+ * then adding the digits of the number derived from it, etc., 
+ * until the remaining number has only one digit. 
+ * The number of additions required to obtain a single digit from a number n 
+ * is called the additive persistence of n, and the digit obtained is called 
+ * the digital root of n.
+ * For example, the sequence obtained from the starting number 9876 is (9876, 30, 3), so 
+ * 9876 has an additive persistence of 2 and a digital root of 3.
+ *)
+
+
+(* ***** PROVIDE COMMENT BLOCKS FOR THE FOLLOWING FUNCTIONS ***** *)
+
+(* function : Calculate the number of additions needed to reach digital root
+   * implementation:  Keep track of number of additions by adding to 
+   * existing number in the return    
+   * statement, but using 
+*) 
+
+
+let rec additivePersistence n = 
+	if n < 10 then 0
+	else 1 + additivePersistence ( sumList ( digitsOfInt  n))
+
+
+
+(* digitalRoot : int -> int 
+   * function : Calculate the digital root of a number
+   * implementation: Break number into a list with digitsOfInt, and then add all the numbers using     
+   * sumList
+*) 
+
+
+let rec digitalRoot n =match n with 
+| 0 -> 0
+| x -> if ((x/10) = 0) then x else digitalRoot (sumList (digitsOfInt x))
+
+(* append : a * list -> a * list  -> a * list 
+   * function : Append two lists 
+   * implementation: Recursively add the head element of one list into 2nd list using cons
+*) 
+let rec append l1 l2 = 
+    match l1 with
+    | [] -> l2
+    | h :: [] -> h :: (l2)
+    | h :: t -> h :: (append t l2) 
+
+(* listReverse: a * list -> a * list 
+   * function : Reverses the order of elements in a given list and returns the new list.
+   * implementation: Appends head element of into a new list container recursively, so beginning 
+ * elements are in the back
+*) 
+
+let rec listReverse l = match l with 
+    | [] -> []
+    | h::[] -> [h]
+    | h::t -> append (listReverse t)  [h] 
+
+
+let explode s = 
+  let rec _exp i = 
+    if i >= String.length s then [] else (s.[i])::(_exp (i+1)) in
+  _exp 0
+
+
+(* palindrome : string -> bool 
+ * function: Checks if a string is a palindrome, and returns true or false
+ * implementation: Using explode and reverse, the algorithm checks if the
+ *  reverse is 
+ * the same as the original string, which satisfies the definition of a 
+ * palindrome.
+ *)
+let palindrome w = 
+if ((explode w) = (listReverse (explode w))) then true else false
+(*if ((explode w) = (rev (explode w))) then true else false *)
+
+(************** Add Testing Code Here ***************)
+
+(* Append testing *)
+
+
+let prop_reverse = listReverse [1;2;3;4] = [4;3;2;1]
