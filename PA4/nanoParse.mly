@@ -33,6 +33,7 @@ open Nano
 
 %%
 
+(* Statement based Expressions *)
 exp: 
     | LET Id EQ exp IN exp      { Let ($2, $4, $6) }
     | LET REC Id EQ exp IN exp  { Letrec ($3, $5, $7) }
@@ -41,6 +42,7 @@ exp:
 
     | orexp                     {$1}
 
+(* Logical Operations *)
 orexp: 
     | orexp OR andexp           { Bin ($1, Or, $3) }
     | andexp                    {$1}
@@ -64,6 +66,7 @@ lexp:
     | lexp RBRAC                { Bin ($1, Cons, NilExpr) }
     | aexp1                     {$1}
 
+(* Arithmetic Expressions *)
 asexp: 
     | asexp PLUS mdexp          { Bin ($1, Plus, $3) }
     | asexp MINUS mdexp         { Bin ($1, Minus, $3) }
@@ -76,6 +79,8 @@ mdexp:
 fexp: 
     | fexp bexp                 { App ($1, $2)}
     | bexp                      {$1}
+
+(* Base Expressions *)
 bexp: 
     | Num                       { Const $1 }
     | Id                        { Var $1 }
