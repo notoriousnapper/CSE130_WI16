@@ -1,0 +1,7 @@
+
+
+
+Main Problem:
+Order of nanoLex.ml is important, because it is how the input strings
+are interpreted.  If you put the rule for string as a variable, then any
+string will be that first.
