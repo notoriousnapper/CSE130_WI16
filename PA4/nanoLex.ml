@@ -644,167 +644,167 @@ let rec token lexbuf =
 and __ocaml_lex_token_rec lexbuf __ocaml_lex_state =
   match Lexing.engine __ocaml_lex_tables __ocaml_lex_state lexbuf with
       | 0 ->
-# 7 "nanoLex.mll"
+# 14 "nanoLex.mll"
                             ( token lexbuf )
 # 650 "nanoLex.ml"
 
   | 1 ->
-# 8 "nanoLex.mll"
+# 15 "nanoLex.mll"
                             ( TRUE )
 # 655 "nanoLex.ml"
 
   | 2 ->
-# 9 "nanoLex.mll"
+# 16 "nanoLex.mll"
                             ( FALSE )
 # 660 "nanoLex.ml"
 
   | 3 ->
-# 10 "nanoLex.mll"
+# 18 "nanoLex.mll"
                             ( LET )
 # 665 "nanoLex.ml"
 
   | 4 ->
-# 11 "nanoLex.mll"
+# 19 "nanoLex.mll"
                             ( REC )
 # 670 "nanoLex.ml"
 
   | 5 ->
-# 12 "nanoLex.mll"
+# 20 "nanoLex.mll"
                             ( EQ )
 # 675 "nanoLex.ml"
 
   | 6 ->
-# 13 "nanoLex.mll"
+# 21 "nanoLex.mll"
                             ( IN )
 # 680 "nanoLex.ml"
 
   | 7 ->
-# 14 "nanoLex.mll"
+# 22 "nanoLex.mll"
                             ( FUN )
 # 685 "nanoLex.ml"
 
   | 8 ->
-# 15 "nanoLex.mll"
+# 23 "nanoLex.mll"
                             ( ARROW )
 # 690 "nanoLex.ml"
 
   | 9 ->
-# 16 "nanoLex.mll"
+# 25 "nanoLex.mll"
                             ( IF )
 # 695 "nanoLex.ml"
 
   | 10 ->
-# 17 "nanoLex.mll"
+# 26 "nanoLex.mll"
                             ( THEN )
 # 700 "nanoLex.ml"
 
   | 11 ->
-# 18 "nanoLex.mll"
+# 27 "nanoLex.mll"
                             ( ELSE )
 # 705 "nanoLex.ml"
 
   | 12 ->
-# 20 "nanoLex.mll"
+# 29 "nanoLex.mll"
                             ( PLUS )
 # 710 "nanoLex.ml"
 
   | 13 ->
-# 21 "nanoLex.mll"
+# 30 "nanoLex.mll"
                             ( MINUS )
 # 715 "nanoLex.ml"
 
   | 14 ->
-# 22 "nanoLex.mll"
+# 31 "nanoLex.mll"
                             ( MUL )
 # 720 "nanoLex.ml"
 
   | 15 ->
-# 23 "nanoLex.mll"
+# 32 "nanoLex.mll"
                             ( DIV )
 # 725 "nanoLex.ml"
 
   | 16 ->
-# 24 "nanoLex.mll"
+# 33 "nanoLex.mll"
                             ( LT )
 # 730 "nanoLex.ml"
 
   | 17 ->
-# 25 "nanoLex.mll"
+# 34 "nanoLex.mll"
                             ( LE )
 # 735 "nanoLex.ml"
 
   | 18 ->
-# 26 "nanoLex.mll"
+# 35 "nanoLex.mll"
                             ( NE )
 # 740 "nanoLex.ml"
 
   | 19 ->
-# 27 "nanoLex.mll"
+# 36 "nanoLex.mll"
                             ( AND )
 # 745 "nanoLex.ml"
 
   | 20 ->
-# 28 "nanoLex.mll"
+# 37 "nanoLex.mll"
                             ( OR )
 # 750 "nanoLex.ml"
 
   | 21 ->
-# 30 "nanoLex.mll"
+# 39 "nanoLex.mll"
                             ( LPAREN )
 # 755 "nanoLex.ml"
 
   | 22 ->
-# 31 "nanoLex.mll"
+# 40 "nanoLex.mll"
                             ( RPAREN )
 # 760 "nanoLex.ml"
 
   | 23 ->
-# 33 "nanoLex.mll"
+# 42 "nanoLex.mll"
                             ( LBRAC )
 # 765 "nanoLex.ml"
 
   | 24 ->
-# 34 "nanoLex.mll"
+# 43 "nanoLex.mll"
                             ( RBRAC )
 # 770 "nanoLex.ml"
 
   | 25 ->
-# 35 "nanoLex.mll"
+# 44 "nanoLex.mll"
                             ( COLONCOLON )
 # 775 "nanoLex.ml"
 
   | 26 ->
-# 36 "nanoLex.mll"
+# 45 "nanoLex.mll"
                             ( SEMI )
 # 780 "nanoLex.ml"
 
   | 27 ->
 let
-# 38 "nanoLex.mll"
+# 47 "nanoLex.mll"
                   inum
 # 786 "nanoLex.ml"
 = Lexing.sub_lexeme lexbuf lexbuf.Lexing.lex_start_pos lexbuf.Lexing.lex_curr_pos in
-# 38 "nanoLex.mll"
+# 47 "nanoLex.mll"
                             ( Num(int_of_string inum) )
 # 790 "nanoLex.ml"
 
   | 28 ->
 let
-# 39 "nanoLex.mll"
+# 48 "nanoLex.mll"
                                                    str
 # 796 "nanoLex.ml"
 = Lexing.sub_lexeme lexbuf lexbuf.Lexing.lex_start_pos lexbuf.Lexing.lex_curr_pos in
-# 40 "nanoLex.mll"
-                            ( Id(str) )
+# 48 "nanoLex.mll"
+                                                       ( Id(str) )
 # 800 "nanoLex.ml"
 
   | 29 ->
-# 42 "nanoLex.mll"
+# 49 "nanoLex.mll"
                             ( EOF )
 # 805 "nanoLex.ml"
 
   | 30 ->
-# 43 "nanoLex.mll"
+# 50 "nanoLex.mll"
                             ( raise (MLFailure ("Illegal Character '"^(Lexing.lexeme lexbuf)^"'")) )
 # 810 "nanoLex.ml"
 

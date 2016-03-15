@@ -33,7 +33,7 @@ open Nano
 
 %%
 
-(* Statement based Expressions *)
+/* Statement based Expressions */
 exp: 
     | LET Id EQ exp IN exp      { Let ($2, $4, $6) }
     | LET REC Id EQ exp IN exp  { Letrec ($3, $5, $7) }
@@ -42,14 +42,14 @@ exp:
 
     | orexp                     {$1}
 
-(* Logical Operations *)
+/* Logical Operations */
 orexp: 
     | orexp OR andexp           { Bin ($1, Or, $3) }
     | andexp                    {$1}
 
 andexp: 
-    | andexp AND compexp        { Bin ($1, And, $3) }
-    | compexp                   {$1}
+    | andexp AND logexp        { Bin ($1, And, $3) }
+    | logexp                   {$1}
 
 logexp: 
     | logexp EQ lexp          { Bin ($1, Eq, $3) }
@@ -60,13 +60,13 @@ logexp:
     | lexp                      {$1}
 
 lexp: 
-    | aexp1 COLONCOLON lexp     { Bin ($1, Cons, $3) }
-    | aexp1 SEMI lexp           { Bin ($1, Cons, $3) }
+    | asexp COLONCOLON lexp     { Bin ($1, Cons, $3) }
+    | asexp SEMI lexp           { Bin ($1, Cons, $3) }
     | LBRAC lexp                { $2 }
     | lexp RBRAC                { Bin ($1, Cons, NilExpr) }
-    | aexp1                     {$1}
+    | asexp                     {$1}
 
-(* Arithmetic Expressions *)
+/* Arithmetic Expressions */
 asexp: 
     | asexp PLUS mdexp          { Bin ($1, Plus, $3) }
     | asexp MINUS mdexp         { Bin ($1, Minus, $3) }
@@ -80,7 +80,7 @@ fexp:
     | fexp bexp                 { App ($1, $2)}
     | bexp                      {$1}
 
-(* Base Expressions *)
+/* Base Expressions */
 bexp: 
     | Num                       { Const $1 }
     | Id                        { Var $1 }
